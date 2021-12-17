@@ -43,6 +43,11 @@ display:flex;
 flex-wrap: wrap;
 }
 
+.session-display{
+    display:flex;
+    flex-direction: column;
+    row-gap: 30px;
+}
 .movie-poster{
     height:210px;
     width: 145px;

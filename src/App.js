@@ -1,6 +1,8 @@
 import reactDom from "react-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./assets/style.css"
 import Movies from "./components/Movies";
+import SessionsMovie from "./components/SessionsMovie";
 
 export default function App(){
     return(
@@ -8,9 +10,17 @@ export default function App(){
         <header className="main-header">
             <span>CINEFLEX</span>
         </header>
-        <main className="screen-general">
-        <Movies/>
-        </main>
+        <div className = "screen-general">
+        <BrowserRouter>
+        <Routes>
+
+        <Route path = "/" element = {<Movies/>}></Route>
+        <Route path = "/sessoes/:idMovie" element = {<SessionsMovie/>}></Route>
+
+        
+        </Routes>
+        </BrowserRouter>
+        </div>
         </>
     )
 }
