@@ -64,11 +64,24 @@
 }
 
 .seats-display {
-  background-color: rgb(106, 106, 138);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
+
+.seats-map {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid #808f9d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+
 body {
   background-color: rgb(39, 41, 139);
 }
