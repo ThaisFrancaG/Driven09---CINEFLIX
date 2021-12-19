@@ -1,8 +1,8 @@
 import reactDom from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./assets/style.css";
-import Movies from "./components/Movies";
-import RenderSeats from "./components/RenderSeats";
+import Movies from "./components/MoviesRender";
+import RenderSeats from "./components/SeatsRender";
 import SessionsMovie from "./components/SessionsMovie";
 
 export default function App() {

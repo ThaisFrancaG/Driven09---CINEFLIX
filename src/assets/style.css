@@ -70,7 +70,12 @@
   padding: 20px;
   box-sizing: border-box;
 }
-
+.screen-all {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .seats-map {
   width: 26px;
   height: 26px;

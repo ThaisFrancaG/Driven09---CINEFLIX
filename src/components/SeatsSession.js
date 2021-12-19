@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function SeatsSession(props) {
   let allSeats = props.seats;
@@ -8,16 +8,30 @@ export default function SeatsSession(props) {
   let secondRow = allSeats.slice(10, 20);
   let thirdRow = allSeats.slice(20, 30);
 
-  const [seastState, setSeatState] = useState(false);
+  const [quantitySeats, setQuantitySeats] = useState(0);
   const [selectedSeats, setSelectedSeats] = useState([]);
-  function selectSeat(question) {
-    let isAvaliable = question.isAvailable;
+  function selectSeat(seatSelected) {
+    let isAvaliable = seatSelected.isAvailable;
     isAvaliable
-      ? setSelectedSeats([...selectedSeats, question.id])
+      ? changeSelection(seatSelected.id)
       : alert("Esse assento já está ocupado");
   }
 
-  console.log(selectedSeats);
+  function changeSelection(seatSelected) {
+    if (selectedSeats.includes(seatSelected)) {
+      alert("será desselecionado");
+      let index = selectedSeats.indexOf(seatSelected);
+      selectedSeats.splice(index, 1);
+      setQuantitySeats(quantitySeats - 1);
+    } else {
+      setSelectedSeats([...selectedSeats, seatSelected]);
+      setQuantitySeats(quantitySeats + 1);
+    }
+  }
+
+  useEffect(() => {
+    setSelectedSeats(selectedSeats);
+  }, [quantitySeats]);
 
   return (
     <SeatsSpace>
