@@ -4,6 +4,7 @@ import "./assets/style.css";
 import Movies from "./components/MoviesRender";
 import RenderSeats from "./components/SeatsRender";
 import SessionsMovie from "./components/SessionsMovie";
+import TicketConfirm from "./components/TicketConfirm";
 
 export default function App() {
   return (
@@ -19,6 +20,10 @@ export default function App() {
             <Route
               path="/filme/:idMovie/sessao/:idSession"
               element={<RenderSeats />}
+            />
+            <Route
+              path="/filme/:idMovie/sessao/:idSession/sucesso"
+              element={<TicketConfirm />}
             />
             {/* <Route path="/sessao/:idSessao" element={<RenderSeats />} /> */}
           </Routes>

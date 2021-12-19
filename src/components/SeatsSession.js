@@ -8,12 +8,13 @@ export default function SeatsSession(props) {
   let secondRow = allSeats.slice(10, 20);
   let thirdRow = allSeats.slice(20, 30);
 
-  const [quantitySeats, setQuantitySeats] = useState(0);
-  const [selectedSeats, setSelectedSeats] = useState([]);
+  let quantitySeats = props.quantitySeats;
+  let selectedSeats = props.selectedSeats;
+
   function selectSeat(seatSelected) {
     let isAvaliable = seatSelected.isAvailable;
     isAvaliable
-      ? changeSelection(seatSelected.id)
+      ? changeSelection(seatSelected.name)
       : alert("Esse assento já está ocupado");
   }
 
@@ -22,15 +23,15 @@ export default function SeatsSession(props) {
       alert("será desselecionado");
       let index = selectedSeats.indexOf(seatSelected);
       selectedSeats.splice(index, 1);
-      setQuantitySeats(quantitySeats - 1);
+      props.setQuantitySeats(quantitySeats - 1);
     } else {
-      setSelectedSeats([...selectedSeats, seatSelected]);
-      setQuantitySeats(quantitySeats + 1);
+      props.setSelectedSeats([...selectedSeats, seatSelected]);
+      props.setQuantitySeats(quantitySeats + 1);
     }
   }
 
   useEffect(() => {
-    setSelectedSeats(selectedSeats);
+    props.setSelectedSeats(selectedSeats);
   }, [quantitySeats]);
 
   return (
@@ -39,7 +40,7 @@ export default function SeatsSession(props) {
         {firstRow.map((seat) => (
           <Seat
             key={seat.id}
-            selected={selectedSeats.includes(seat.id)}
+            selected={selectedSeats.includes(seat.name)}
             available={seat.isAvailable}
             onClick={() => selectSeat(seat)}
           >
@@ -51,7 +52,7 @@ export default function SeatsSession(props) {
         {secondRow.map((seat) => (
           <Seat
             key={seat.id}
-            selected={selectedSeats.includes(seat.id) ? true : false}
+            selected={selectedSeats.includes(seat.name) ? true : false}
             available={seat.isAvailable}
             onClick={() => selectSeat(seat)}
           >
@@ -63,7 +64,7 @@ export default function SeatsSession(props) {
         {thirdRow.map((seat) => (
           <Seat
             key={seat.id}
-            selected={selectedSeats.includes(seat.id) ? true : false}
+            selected={selectedSeats.includes(seat.name) ? true : false}
             available={seat.isAvailable}
             onClick={() => selectSeat(seat)}
           >

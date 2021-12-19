@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 
 export default function Sessions(props) {
   let sessionDetails = props.sessions;
-
-  // console.log(sessionDetails);
+  let location = useLocation();
+  let movieTitle = location.state;
+  console.log(movieTitle);
 
   let individualSession = sessionDetails.map((teste, i) => (
     <DayContainer key={i}>

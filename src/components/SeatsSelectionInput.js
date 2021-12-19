@@ -45,4 +45,9 @@ const FormItem = styled.div`
   width: 90vw;
   padding: 10px;
   box-sizing: border-box;
+  input {
+    height: 51px;
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+  }
 `;
