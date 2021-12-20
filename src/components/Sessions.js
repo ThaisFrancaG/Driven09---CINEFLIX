@@ -1,23 +1,34 @@
-import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Sessions(props) {
   let sessionDetails = props.sessions;
-  let location = useLocation();
-  let movieName = location.state[0];
-  let moviePoster = location.state[1];
 
-  let individualSession = sessionDetails.map((teste, i) => (
+  let moviePoster = props.request[0];
+  let movieName = props.request[1];
+
+  let individualSession = sessionDetails.map((session, i) => (
     <DayContainer key={i}>
-      {teste.weekday}-{teste.date}
+      {session.weekday}-{session.date}
       <ButtonContainer>
-        {teste.showtimes.map((test2, j) => (
+        {session.showtimes.map((showtime, j) => (
           <Link
-            to={`sessao/${test2.id}`}
-            state={[movieName, moviePoster, test2.name, teste.date]}
+            key={showtime.id}
+            to={`sessao/${showtime.id}`}
+            state={[movieName, moviePoster, showtime.name, session.date]}
           >
-            <Button key={j}>{test2.name}</Button>
+            <Button
+              key={j}
+              onClick={() =>
+                props.setRequest([
+                  ...props.request,
+                  showtime.name,
+                  session.date,
+                ])
+              }
+            >
+              {showtime.name}
+            </Button>
           </Link>
         ))}
       </ButtonContainer>

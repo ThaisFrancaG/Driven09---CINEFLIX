@@ -27,6 +27,8 @@ export default function Movies(props) {
       title={movie.title}
       posterURL={movie.posterURL}
       idMovie={movie.id}
+      request={props.request}
+      setRequest={props.setRequest}
     />
   ));
 

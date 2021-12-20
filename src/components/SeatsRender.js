@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, Link, useLocation } from "react-router-dom";
+import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
 import SeatsSession from "./SeatsSession";
 import styled from "styled-components";
 import SeatsSelectionInput from "./SeatsSelectionInput";
 import SeatsReference from "./SeatsReference";
-import TicketConfirm from "./TicketConfirm";
 
 export default function RenderSeats(props) {
   const [seats, setSeats] = useState([]);
@@ -18,11 +17,18 @@ export default function RenderSeats(props) {
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [seatId, setSeatId] = useState([]);
 
-  const [conditionalPath, setPath] = useState("#");
+  const navigate = useNavigate();
 
-  let location = useLocation();
-  let movieDetails = location.state;
-
+  let confirmationToSend = {
+    ids: seatId,
+    name: userName,
+    cpf: userCPF,
+  };
+  function errorAlert() {
+    alert(
+      "Algo deu errado na sua requisição, favou tentar novamente mais tarde"
+    );
+  }
   function checkInputs() {
     if (quantitySeats === 0) {
       alert("Por favor, selecione ao menos um assento");
@@ -36,7 +42,17 @@ export default function RenderSeats(props) {
       alert("Formato de CPF inválido. Insira apenas números (11 dígitos)");
       return false;
     }
-    setPath("sucesso");
+    props.setRequest([...props.request, selectedSeats, confirmationToSend]);
+    sendConfirmation();
+  }
+
+  function sendConfirmation() {
+    const requisition = axios.post(
+      "https://mock-api.driven.com.br/api/v4/cineflex/seats/book-many",
+      confirmationToSend
+    );
+    requisition.then(navigate(`/filme/sucesso`));
+    requisition.catch(errorAlert);
   }
   useEffect(() => {
     const requisition = axios.get(
@@ -77,24 +93,9 @@ export default function RenderSeats(props) {
           userCPF={userCPF}
           setUserCPF={setUserCPF}
         />
-        <Link
-          to={conditionalPath}
-          state={[
-            movieDetails[0],
-            movieDetails[1],
-            movieDetails[2],
-            movieDetails[3],
-            userName,
-            userCPF,
-            quantitySeats,
-            selectedSeats,
-            seatId,
-          ]}
-        >
-          <Button onClick={() => checkInputs()}>
-            Reservar {quantitySeats} assento(s)
-          </Button>
-        </Link>
+        <Button onClick={() => checkInputs()}>
+          Reservar {quantitySeats} assento(s)
+        </Button>
       </div>
     </>
   );

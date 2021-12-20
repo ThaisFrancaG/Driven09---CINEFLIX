@@ -1,31 +1,37 @@
-import{useState,useEffect} from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Sessions from "./Sessions";
 
-export default function Session(){
-    const[sessions,checkSession] = useState([]);
-    const {idMovie} = useParams();
-    
-    useEffect(()=>{
-    
-        const requisition  = axios.get(`https://mock-api.driven.com.br/api/v4/cineflex/movies/${idMovie}/showtimes`)
-    
-        requisition.then(response=>printSessions(response))
-        requisition.catch(response=>{alert("algo deu errado, favor atualizar a página")})
-    },[])
+export default function Session(props) {
+  const [sessions, checkSession] = useState([]);
+  const { idMovie } = useParams();
 
-    function printSessions(response){
-        checkSession(response.data.days)
-    }
+  useEffect(() => {
+    const requisition = axios.get(
+      `https://mock-api.driven.com.br/api/v4/cineflex/movies/${idMovie}/showtimes`
+    );
 
-    return(
-        <>  
-        <header className = "screen-title">Selecione o Horário</header>
-        <div className = "session-display">
-        <Sessions sessions = {sessions}/>
-        </div>
-        </>
-    )
-    
+    requisition.then((response) => printSessions(response));
+    requisition.catch((response) => {
+      alert("algo deu errado, favor atualizar a página");
+    });
+  }, []);
+
+  function printSessions(response) {
+    checkSession(response.data.days);
+  }
+
+  return (
+    <>
+      <header className="screen-title">Selecione o Horário</header>
+      <div className="session-display">
+        <Sessions
+          sessions={sessions}
+          request={props.request}
+          setRequest={props.setRequest}
+        />
+      </div>
+    </>
+  );
 }
