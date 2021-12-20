@@ -10,22 +10,27 @@ export default function SeatsSession(props) {
 
   let quantitySeats = props.quantitySeats;
   let selectedSeats = props.selectedSeats;
+  let seatId = props.seatId;
 
   function selectSeat(seatSelected) {
     let isAvaliable = seatSelected.isAvailable;
     isAvaliable
-      ? changeSelection(seatSelected.name)
+      ? changeSelection(seatSelected)
       : alert("Esse assento já está ocupado");
   }
 
   function changeSelection(seatSelected) {
-    if (selectedSeats.includes(seatSelected)) {
+    if (selectedSeats.includes(seatSelected.name)) {
       alert("será desselecionado");
-      let index = selectedSeats.indexOf(seatSelected);
+      let index = selectedSeats.indexOf(seatSelected.name);
       selectedSeats.splice(index, 1);
+      seatId.splice(index, 1);
+
       props.setQuantitySeats(quantitySeats - 1);
     } else {
-      props.setSelectedSeats([...selectedSeats, seatSelected]);
+      props.setSelectedSeats([...selectedSeats, seatSelected.name]);
+      props.setSeatId([...seatId, seatSelected.id]);
+
       props.setQuantitySeats(quantitySeats + 1);
     }
   }

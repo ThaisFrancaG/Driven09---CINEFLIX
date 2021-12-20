@@ -16,8 +16,12 @@ export default function RenderSeats(props) {
 
   const [quantitySeats, setQuantitySeats] = useState(0);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [seatId, setSeatId] = useState([]);
 
   const [conditionalPath, setPath] = useState("#");
+
+  let location = useLocation();
+  let movieDetails = location.state;
 
   function checkInputs() {
     if (quantitySeats === 0) {
@@ -54,7 +58,7 @@ export default function RenderSeats(props) {
   return (
     <>
       <header className="screen-title">Selecione o Horário</header>
-      <div class="screen-all">
+      <div className="screen-all">
         <div className="seats-display">
           <SeatsSession
             seats={seats}
@@ -62,6 +66,8 @@ export default function RenderSeats(props) {
             setQuantitySeats={setQuantitySeats}
             selectedSeats={selectedSeats}
             setSelectedSeats={setSelectedSeats}
+            seatId={seatId}
+            setSeatId={setSeatId}
           />
         </div>
         <SeatsReference />
@@ -73,12 +79,17 @@ export default function RenderSeats(props) {
         />
         <Link
           to={conditionalPath}
-          state={
-            ({ userName: userName },
-            { userCPF: userCPF },
-            { quantitySeats: quantitySeats },
-            { movieName: props.movieName })
-          }
+          state={[
+            movieDetails[0],
+            movieDetails[1],
+            movieDetails[2],
+            movieDetails[3],
+            userName,
+            userCPF,
+            quantitySeats,
+            selectedSeats,
+            seatId,
+          ]}
         >
           <Button onClick={() => checkInputs()}>
             Reservar {quantitySeats} assento(s)

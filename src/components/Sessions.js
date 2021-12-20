@@ -5,15 +5,18 @@ import { Link, useParams, useLocation } from "react-router-dom";
 export default function Sessions(props) {
   let sessionDetails = props.sessions;
   let location = useLocation();
-  let movieTitle = location.state;
-  console.log(movieTitle);
+  let movieName = location.state[0];
+  let moviePoster = location.state[1];
 
   let individualSession = sessionDetails.map((teste, i) => (
     <DayContainer key={i}>
       {teste.weekday}-{teste.date}
       <ButtonContainer>
         {teste.showtimes.map((test2, j) => (
-          <Link to={`sessao/${test2.id}`}>
+          <Link
+            to={`sessao/${test2.id}`}
+            state={[movieName, moviePoster, test2.name, teste.date]}
+          >
             <Button key={j}>{test2.name}</Button>
           </Link>
         ))}

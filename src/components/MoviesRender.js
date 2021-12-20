@@ -23,6 +23,7 @@ export default function Movies(props) {
 
   const moviesList = movies.map((movie) => (
     <MoviePoster
+      key={movie.id}
       title={movie.title}
       posterURL={movie.posterURL}
       idMovie={movie.id}
