@@ -4,11 +4,11 @@ export default function SeatsReference() {
     <Map>
       <MapDetails>
         <span className="seats-map available"></span>
-        <span> Selecionado</span>
+        <span> Disponível</span>
       </MapDetails>
       <MapDetails>
         <span className="seats-map selected"></span>
-        <span> Disponível</span>
+        <span> Selecionado</span>
       </MapDetails>
       <MapDetails>
         <span className="seats-map unavailable"></span>

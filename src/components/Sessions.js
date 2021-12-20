@@ -12,11 +12,7 @@ export default function Sessions(props) {
       {session.weekday}-{session.date}
       <ButtonContainer>
         {session.showtimes.map((showtime, j) => (
-          <Link
-            key={showtime.id}
-            to={`sessao/${showtime.id}`}
-            state={[movieName, moviePoster, showtime.name, session.date]}
-          >
+          <Link key={showtime.id} to={`sessao/${showtime.id}`}>
             <Button
               key={j}
               onClick={() =>
@@ -39,7 +35,8 @@ export default function Sessions(props) {
 }
 
 const DayContainer = styled.div`
-  background-color: grey;
+  font-size: 20px;
+  line-height: 30px;
 `;
 
 const Button = styled.button`
@@ -47,15 +44,21 @@ const Button = styled.button`
   height: 43px;
 
   background-color: #e8833a;
-
+  border: none;
+  border-radius: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
 
   color: #ffffff;
   font-size: 18px;
+
+  margin: 23px 5px;
 `;
 
 const ButtonContainer = styled.div`
-  background-color: blue;
+  display: flex;
+  align-items: center;
+
+  max-height: 50px;
 `;

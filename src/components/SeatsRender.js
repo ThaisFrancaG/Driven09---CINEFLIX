@@ -97,6 +97,15 @@ export default function RenderSeats(props) {
           Reservar {quantitySeats} assento(s)
         </Button>
       </div>
+      <Footer>
+        <img src={props.request[0]} alt={props.request[1]} />
+        <MovieInformation>
+          <span>{props.request[1]}</span>
+          <span>
+            {props.request[3]} - {props.request[2]}
+          </span>
+        </MovieInformation>
+      </Footer>
     </>
   );
 }
@@ -108,4 +117,32 @@ const Button = styled.button`
   color: #ffffff;
   font-size: 18px;
   border: none;
+`;
+
+const Footer = styled.footer`
+  width: 100vw;
+  height: 117px;
+  display: row;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background-color: #dfe6ed;
+  border-top: 1px solid #9eadba;
+
+  margin-top: 40px;
+  span {
+    font-size: 26px;
+    margin-left: 30px;
+  }
+  img {
+    height: 72px;
+    width: 48px;
+  }
+`;
+
+const MovieInformation = styled.div`
+  display: flex;
+  flex-direction: column;
 `;

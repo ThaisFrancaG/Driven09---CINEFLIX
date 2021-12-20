@@ -7,6 +7,8 @@ export default function SeatsSession(props) {
   let firstRow = allSeats.slice(0, 10);
   let secondRow = allSeats.slice(10, 20);
   let thirdRow = allSeats.slice(20, 30);
+  let fourthRow = allSeats.slice(30, 40);
+  let fifthRow = allSeats.slice(40, 50);
 
   let quantitySeats = props.quantitySeats;
   let selectedSeats = props.selectedSeats;
@@ -67,6 +69,30 @@ export default function SeatsSession(props) {
       </SeatRow>
       <SeatRow>
         {thirdRow.map((seat) => (
+          <Seat
+            key={seat.id}
+            selected={selectedSeats.includes(seat.name) ? true : false}
+            available={seat.isAvailable}
+            onClick={() => selectSeat(seat)}
+          >
+            {seat.name}
+          </Seat>
+        ))}
+      </SeatRow>
+      <SeatRow>
+        {fourthRow.map((seat) => (
+          <Seat
+            key={seat.id}
+            selected={selectedSeats.includes(seat.name) ? true : false}
+            available={seat.isAvailable}
+            onClick={() => selectSeat(seat)}
+          >
+            {seat.name}
+          </Seat>
+        ))}
+      </SeatRow>
+      <SeatRow>
+        {fifthRow.map((seat) => (
           <Seat
             key={seat.id}
             selected={selectedSeats.includes(seat.name) ? true : false}
